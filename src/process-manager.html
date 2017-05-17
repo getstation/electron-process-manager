@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Process Manager</title>
+</head>
+<body>
+  <pre id="process"></pre>
+  <script>
+
+    const { ipcRenderer } = require('electron');
+    ipcRenderer.on('process-manager:data', (_, data) => {
+      const el = document.getElementById('process');
+      el.innerText = JSON.stringify(data,  null, '\t');
+    })
+  </script>
+</body>
+</html>

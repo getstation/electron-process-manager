@@ -17,6 +17,8 @@ const config = {
         include: path.resolve(__dirname, 'src/ui')
       }
     ]
-  }};
+  },
+  target: 'electron-renderer'
+};
 
 module.exports = config;

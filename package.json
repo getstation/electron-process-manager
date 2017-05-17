@@ -4,10 +4,10 @@
   "description": "Process manager UI for Electron applications",
   "main": "src/index.js",
   "scripts": {
-     "dev": "webpack -d --watch",
-     "build" : "webpack -p",
-     "start-example": "cd example && npm start"
-   },
+    "dev": "webpack -d --watch",
+    "build": "webpack -p",
+    "start-example": "cd example && npm start"
+  },
   "author": "",
   "license": "MIT",
   "devDependencies": {
@@ -15,6 +15,8 @@
     "babel-loader": "^7.0.0",
     "babel-preset-es2015": "^6.24.1",
     "babel-preset-react": "^6.24.1",
+    "babel-preset-stage-0": "^6.24.1",
+    "prop-types": "^15.5.10",
     "react": "^15.5.4",
     "react-dom": "^15.5.4",
     "webpack": "^2.5.1"

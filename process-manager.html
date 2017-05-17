@@ -3,18 +3,15 @@
 <head>
   <meta charset="UTF-8">
   <title>Process Manager</title>
+  <link rel="stylesheet" href="vendor/photon.css">
+  <style>
+    .process-table {
+      /*margin: 10px;*/
+    }
+  </style>
 </head>
 <body>
-  <pre id="process"></pre>
-  <div id="app"></div>
-  <script>
-
-    const { ipcRenderer } = require('electron');
-    ipcRenderer.on('process-manager:data', (_, data) => {
-      const el = document.getElementById('process');
-      el.innerText = JSON.stringify(data,  null, '\t');
-    })
-  </script>
+  <div id="app" class="window"></div>
   <script src="dist/ui-bundle.js"></script>
 </body>
 </html>

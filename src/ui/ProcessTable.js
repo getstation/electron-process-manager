@@ -15,7 +15,9 @@ export default class ProcessTable extends React.Component {
           <tr>
             <th>Pid</th>
             <th>Process Type</th>
-            <th>Private Bytes</th>
+            <th>Private Memory</th>
+            <th>Shared Memory</th>
+            <th>Working Set Size</th>
             <th>WebContents Id</th>
             <th>WebContents Type</th>
             <th>WebContents URL</th>

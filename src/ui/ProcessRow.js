@@ -1,6 +1,8 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import filesize from 'filesize';
 
+const KB = 1024;
 
 export default class ProcessRow extends React.Component {
   static propTypes = {
@@ -26,7 +28,9 @@ export default class ProcessRow extends React.Component {
         <tr>
           <td>{this.props.pid}</td>
           <td>{this.props.type}</td>
-          <td>{this.props.memory.privateBytes}</td>
+          <td>{filesize(this.props.memory.privateBytes*KB)}</td>
+          <td>{filesize(this.props.memory.sharedBytes*KB)}</td>
+          <td>{filesize(this.props.memory.workingSetSize*KB)}</td>
           <td></td>
           <td></td>
           <td></td>
@@ -35,11 +39,14 @@ export default class ProcessRow extends React.Component {
     } else {
       // FIX ME: we consider we have only have 1 webContents per process
       const wc = webContents[0];
+
       return (
         <tr>
           <td>{this.props.pid}</td>
           <td>{this.props.type}</td>
-          <td>{this.props.memory.privateBytes}</td>
+          <td>{filesize(this.props.memory.privateBytes*KB)}</td>
+          <td>{filesize(this.props.memory.sharedBytes*KB)}</td>
+          <td>{filesize(this.props.memory.workingSetSize*KB)}</td>
           <td>{wc.id}</td>
           <td>{wc.type}</td>
           <td>{wc.URL}</td>

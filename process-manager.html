@@ -6,6 +6,7 @@
 </head>
 <body>
   <pre id="process"></pre>
+  <div id="app"></div>
   <script>
 
     const { ipcRenderer } = require('electron');
@@ -14,5 +15,6 @@
       el.innerText = JSON.stringify(data,  null, '\t');
     })
   </script>
+  <script src="dist/ui-bundle.js"></script>
 </body>
 </html>

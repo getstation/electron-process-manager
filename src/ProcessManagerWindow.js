@@ -13,7 +13,7 @@ class ProcessManagerWindow extends BrowserWindow {
     super(winOptions);
     this.options = options;
 
-    const indexHtml = 'file://' + path.join(__dirname, 'process-manager.html');
+    const indexHtml = 'file://' + path.join(__dirname, '..', 'process-manager.html');
     this.loadURL(indexHtml);
   }
 

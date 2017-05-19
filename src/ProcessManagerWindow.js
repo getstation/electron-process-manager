@@ -5,8 +5,8 @@ class ProcessManagerWindow extends BrowserWindow {
 
   constructor(options) {
     const winOptions = Object.assign({
-      width: 400,
-      height: 400,
+      width: 800,
+      height: 300,
       useContentSize: true
     }, options || {});
 

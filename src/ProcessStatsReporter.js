@@ -3,9 +3,17 @@ const { app, webContents } = require('electron');
 
 class ProcessStatsReporter extends EventEmitter {
   start() {
+    // check if not already started
+    if (this._intervalId) return;
+
     this._intervalId = setInterval(() => {
       this.emit('data', this.getReportData());
     }, 1000)
+  }
+
+  stop() {
+    if (this._intervalId) clearInterval(this._intervalId);
+    this._intervalId = null;
   }
 
   getReportData() {

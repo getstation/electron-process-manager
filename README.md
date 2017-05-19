@@ -4,7 +4,7 @@ This package provides a process manager for Electron applications. It's inspired
 
 :warning: For Electron >=1.7.0
 
-![screenshot](/screenshots/window.png)
+![screenshot](.github/screenshots/window.png)
 
 ## Features
 

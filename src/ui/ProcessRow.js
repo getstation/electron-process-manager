@@ -18,14 +18,19 @@ export default class ProcessRow extends React.Component {
       id: PropTypes.number,
       type: PropTypes.string,
       URL: PropTypes.string
-    }))
+    })),
+    selected: PropTypes.bool,
+    onSelect: PropTypes.func
   }
 
   render() {
     const { webContents } = this.props;
     if (!webContents || webContents.length === 0) {
       return (
-        <tr>
+        <tr
+          className={this.props.selected ? 'selected': ''}
+          onClick={this.props.onSelect}
+        >
           <td>{this.props.pid}</td>
           <td>{this.props.type}</td>
           <td>{filesize(this.props.memory.privateBytes*KB)}</td>
@@ -41,7 +46,10 @@ export default class ProcessRow extends React.Component {
       const wc = webContents[0];
 
       return (
-        <tr>
+        <tr
+          className={this.props.selected ? 'selected': ''}
+          onClick={this.props.onSelect}
+        >
           <td>{this.props.pid}</td>
           <td>{this.props.type}</td>
           <td>{filesize(this.props.memory.privateBytes*KB)}</td>

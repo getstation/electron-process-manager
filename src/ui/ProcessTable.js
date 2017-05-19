@@ -5,7 +5,9 @@ import ProcessRow from './ProcessRow';
 
 export default class ProcessTable extends React.Component {
   static propTypes = {
-    processData: PropTypes.arrayOf(PropTypes.object)
+    processData: PropTypes.arrayOf(PropTypes.object),
+    selectedPid: PropTypes.number,
+    onSelectedPidChange: PropTypes.func
   }
 
   render() {
@@ -26,7 +28,12 @@ export default class ProcessTable extends React.Component {
         <tbody>
         {
           this.props.processData.map(p =>
-            <ProcessRow key={p.pid} {...p} />
+            <ProcessRow
+              key={p.pid}
+              {...p}
+              onSelect={() => this.props.onSelectedPidChange(p.pid)}
+              selected={this.props.selectedPid === p.pid}
+            />
           )
         }
         </tbody>

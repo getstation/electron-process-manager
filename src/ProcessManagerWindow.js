@@ -13,6 +13,10 @@ class ProcessManagerWindow extends BrowserWindow {
     super(winOptions);
     this.options = options;
 
+    this._reporterDataEventCallback = this._reporterDataEventCallback.bind(this);
+
+    if (this.options.reporter) this.attachProcessReporter(this.options.reporter);
+
     const indexHtml = 'file://' + path.join(__dirname, '..', 'process-manager.html');
     this.loadURL(indexHtml);
   }
@@ -31,6 +35,17 @@ class ProcessManagerWindow extends BrowserWindow {
 
   openDevTools() {
     this.webContents.openDevTools();
+  }
+
+  _reporterDataEventCallback(reportData) {
+    if(!this) return
+    this.sendStatsReport(reportData);
+  }
+
+  attachProcessReporter(reporter) {
+    reporter.on('data', this._reporterDataEventCallback);
+    this.on('closed', () => reporter.removeListener('data', this._reporterDataEventCallback))
+    reporter.start();
   }
 }
 

@@ -1,9 +1,8 @@
-var electron = require('electron');
-var app = electron.app;
-var webContents = electron.webContents;
-var BrowserWindow = electron.BrowserWindow;
+var { app, shell, webContents, BrowserWindow, Menu} = require('electron');
 var join = require('path').join;
-var { openProcessManager }  = require('electron-process-manager')
+
+var { openProcessManager }  = require('electron-process-manager');
+const defaultMenu = require('electron-default-menu');
 
 app.once('window-all-closed',function() { app.quit(); });
 
@@ -12,8 +11,17 @@ app.once('ready', function() {
     w.once('closed', function() { w = null; });
     w.loadURL('file://' + join(__dirname, 'index.html'));
 
-    setTimeout(() => {
-      openProcessManager()
-    }, 1000)
+    const menu =
+      defaultMenu(app, shell)
+      .map(menu => {
+        if(menu.label === 'Window') {
+          menu.submenu.push({
+            label: 'Open Process Manager',
+            click: () => openProcessManager()
+          })
+        }
+        return menu;
+      });
 
+   Menu.setApplicationMenu(Menu.buildFromTemplate(menu));
 });

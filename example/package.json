@@ -12,7 +12,8 @@
   "devDependencies": {
     "electron": "^1.7.1"
   },
-  "dependencies" : {
+  "dependencies": {
+    "electron-default-menu": "^1.0.1",
     "electron-process-manager": "file:../"
   }
 }

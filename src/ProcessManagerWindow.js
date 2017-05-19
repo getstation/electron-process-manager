@@ -1,6 +1,8 @@
 const  { app, BrowserWindow, shell } = require('electron');
 const path = require('path');
 
+const ProcessStatsReporter = require('./ProcessStatsReporter.js');
+
 class ProcessManagerWindow extends BrowserWindow {
 
   constructor(options) {
@@ -13,9 +15,8 @@ class ProcessManagerWindow extends BrowserWindow {
     super(winOptions);
     this.options = options;
 
-    this._reporterDataEventCallback = this._reporterDataEventCallback.bind(this);
-
-    if (this.options.reporter) this.attachProcessReporter(this.options.reporter);
+    this.reporter = new ProcessStatsReporter();
+    this.attachProcessReporter();
 
     const indexHtml = 'file://' + path.join(__dirname, '..', 'process-manager.html');
     this.loadURL(indexHtml);
@@ -24,7 +25,6 @@ class ProcessManagerWindow extends BrowserWindow {
   showWhenReady() {
     this.once('ready-to-show', () => {
       this.show();
-      this.openDevTools()
     });
   }
 
@@ -37,14 +37,10 @@ class ProcessManagerWindow extends BrowserWindow {
     this.webContents.openDevTools();
   }
 
-  _reporterDataEventCallback(reportData) {
-    if(!this) return
-    this.sendStatsReport(reportData);
-  }
-
-  attachProcessReporter(reporter) {
-    reporter.on('data', this._reporterDataEventCallback);
-    this.on('closed', () => reporter.removeListener('data', this._reporterDataEventCallback))
+  attachProcessReporter() {
+    const reporter = this.reporter;
+    reporter.on('data', data => this.sendStatsReport(data))
+    this.on('closed', () => reporter.stop());
     reporter.start();
   }
 }

@@ -5,9 +5,7 @@ exports.ProcessStatsReporter = ProcessStatsReporter;
 exports.ProcessManagerWindow = ProcessManagerWindow;
 
 exports.openProcessManager = function() {
-  const reporter = new ProcessStatsReporter();
-
-  const window = new ProcessManagerWindow({ reporter });
+  const window = new ProcessManagerWindow();
   window.showWhenReady();
 
 }

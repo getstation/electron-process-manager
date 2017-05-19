@@ -19,7 +19,7 @@ $ npm install electron-process-manager
 ```
 
 ## Usage
-```
+```js
 const { openProcessManager } = require('electron-process-manager');
 
 openProcessManager();

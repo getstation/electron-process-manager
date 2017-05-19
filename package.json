@@ -5,7 +5,7 @@
   "main": "src/index.js",
   "scripts": {
     "dev": "webpack -d --watch",
-    "build": "webpack -p",
+    "build": "webpack",
     "start-example": "cd example && npm start"
   },
   "author": "",

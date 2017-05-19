@@ -2,7 +2,7 @@
 
 This package provides a process manager for Electron applications. It's inspired from Chrome's task manager.
 
-:warning: For Electron >=1.7.0
+:warning: For Electron >=1.7.1
 
 ![screenshot](.github/screenshots/window.png)
 

@@ -1,6 +1,6 @@
 {
   "name": "electron-process-manager",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "Process manager UI for Electron applications",
   "main": "src/index.js",
   "scripts": {

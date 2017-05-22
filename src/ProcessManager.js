@@ -1,5 +1,5 @@
 const { EventEmitter } = require('events');
-const { app, webContents } = require('electron');
+const process = require('process');
 
 var ProcessManagerWindow = require('./ProcessManagerWindow.js');
 
@@ -20,10 +20,17 @@ class ProcessManager extends EventEmitter {
 
     this.window = new ProcessManagerWindow();
     this.window.showWhenReady();
+    this.window.on('kill-process', pid => this.killProcess(pid))
     this.window.on('closed', () => this.window = null)
     this.emit('open-window', this.window);
 
     return this.window;
+  }
+
+  killProcess(pid) {
+    this.emit('will-kill-process', pid, this.window);
+    process.kill(pid);
+    this.emit('killed-process', pid, this.window);
   }
 
 }

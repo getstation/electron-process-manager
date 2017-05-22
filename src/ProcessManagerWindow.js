@@ -44,8 +44,7 @@ class ProcessManagerWindow extends BrowserWindow {
     ipcMain.on('process-manager:kill-process', (e, pid) => {
       // ignore if not for us
       if(e.sender !== this.webContents) return;
-      console.log('Killing process', pid);
-      process.kill(pid);
+      this.emit('kill-process', pid);
     });
     this.on('closed', () => reporter.stop());
     reporter.start();

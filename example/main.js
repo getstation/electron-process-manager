@@ -1,8 +1,10 @@
 var { app, shell, webContents, BrowserWindow, Menu} = require('electron');
 var join = require('path').join;
 
-var { openProcessManager }  = require('electron-process-manager');
+var processManager  = require('electron-process-manager');
 const defaultMenu = require('electron-default-menu');
+
+processManager.on('killed-process', pid => console.log('Killed process', pid));
 
 app.once('window-all-closed',function() { app.quit(); });
 
@@ -17,7 +19,7 @@ app.once('ready', function() {
         if(menu.label === 'Window') {
           menu.submenu.push({
             label: 'Open Process Manager',
-            click: () => openProcessManager()
+            click: () => processManager.open()
           })
         }
         return menu;

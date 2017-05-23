@@ -43,7 +43,9 @@ class ProcessManagerWindow extends BrowserWindow {
     reporter.on('data', data => this.sendStatsReport(data))
     ipcMain.on('process-manager:kill-process', (e, pid) => {
       // ignore if not for us
-      if(e.sender !== this.webContents) return;
+      if (!this || this.isDestroyed()) return;
+      if (e.sender !== this.webContents) return;
+
       this.emit('kill-process', pid);
     });
     this.on('closed', () => reporter.stop());

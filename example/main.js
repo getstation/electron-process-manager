@@ -1,4 +1,4 @@
-var { app, shell, webContents, BrowserWindow, Menu} = require('electron');
+var { app, shell, BrowserWindow, Menu, ipcMain } = require('electron');
 var join = require('path').join;
 
 var processManager  = require('electron-process-manager');
@@ -27,3 +27,14 @@ app.once('ready', function() {
 
    Menu.setApplicationMenu(Menu.buildFromTemplate(menu));
 });
+
+if (process.env.TEST_PROCESS_MANAGER) {
+  // emulate click on menu item
+  ipcMain.on('open-process-manager', () => processManager.open());
+
+  process.on('uncaughtException', function (error) {
+    console.error(error, error.stack);
+    process.exit(1);
+  });
+
+}

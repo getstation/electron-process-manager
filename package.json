@@ -7,7 +7,8 @@
   "scripts": {
     "dev": "webpack -d --watch",
     "build": "webpack",
-    "start-example": "cd example && npm start",
+    "example": "cd example && npm start",
+    "test": "node tests/test.js",
     "prepare": "npm run build"
   },
   "author": "",
@@ -18,10 +19,13 @@
     "babel-preset-es2015": "^6.24.1",
     "babel-preset-react": "^6.24.1",
     "babel-preset-stage-0": "^6.24.1",
+    "bluebird": "^3.5.0",
+    "bluebird-extra": "^2.0.0",
     "filesize": "^3.5.9",
     "prop-types": "^15.5.10",
     "react": "^15.5.4",
     "react-dom": "^15.5.4",
+    "spectron": "^3.6.4",
     "webpack": "^2.5.1"
   }
 }

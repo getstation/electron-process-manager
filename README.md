@@ -1,12 +1,18 @@
 # Process Manager UI for Electron Apps
 
-This package provides a process manager for Electron applications. It's inspired from Chrome's task manager.
+This package provides a process manager UI for Electron applications.
+
+It opens a window displaying a table of every processes run by the Electron application with information (type, URL for `webContents`, memory..).
 
 [![npm version](https://badge.fury.io/js/electron-process-manager.svg)](https://badge.fury.io/js/electron-process-manager)
 
+![screenshot](https://github.com/getstation/electron-process-manager/raw/master/.github/screenshots/window.png)
+
 :warning: For Electron >=1.7.1
 
-![screenshot](https://github.com/getstation/electron-process-manager/raw/master/.github/screenshots/window.png)
+It can be useful to debug performance of an app with several `webview`.
+
+It's inspired from Chrome's task manager.
 
 ## Features
 

@@ -37,7 +37,7 @@ openProcessManager();
 
 - Be able to sort columns
 - Add physical memory (noted as "Memory" in Chrome's task manager)
-- Add CPU metrics (once [electron#9486](https://github.com/electron/electron/pull/9486)) is merged)
+- Add CPU metrics
 - Add networks metrics
 
 Pull requests welcome :)

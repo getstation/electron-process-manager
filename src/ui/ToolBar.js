@@ -5,7 +5,9 @@ export default class ToolBar extends React.Component {
 
   static propTypes = {
     onKillClick: PropTypes.func,
-    disableKill: PropTypes.bool
+    disableKill: PropTypes.bool,
+    onDebugClick: PropTypes.func,
+    disableDebug: PropTypes.bool
   }
 
   render() {
@@ -18,6 +20,13 @@ export default class ToolBar extends React.Component {
                 onClick={this.props.onKillClick}
               >
                 End process
+              </button>
+              <button
+                className="btn btn-default"
+                disabled={this.props.disableDebug}
+                onClick={this.props.onDebugClick}
+              >
+                Debug process
               </button>
             </div>
           </div>

@@ -25,10 +25,26 @@ export default class ProcessManager extends React.Component {
     return pids.indexOf(this.state.selectedPid) !== -1;
   }
 
+  canDebug() {
+    if (!this.state.selectedPid) return false;
+    const pids = this.state.processData.map(p => p.pid);
+
+    // verify that select pid is in list of processes
+    //return pids.indexOf(this.state.selectedPid) !== -1;
+
+    return true;
+  }
+
   handleKillProcess() {
     const pid = this.state.selectedPid;
     if (!pid) return;
     ipcRenderer.send('process-manager:kill-process', pid);
+  }
+
+  handleDebugProcess() {
+    const pid = this.state.selectedPid;
+    if (!pid) return;
+    ipcRenderer.send('process-manager:debug-process', pid);
   }
 
   render () {
@@ -41,6 +57,9 @@ export default class ProcessManager extends React.Component {
           <ToolBar
             disableKill={!this.canKill()}
             onKillClick={this.handleKillProcess.bind(this)}
+            disableDebug={!this.canDebug()}
+            onDebugClick={this.handleDebugProcess.bind(this)}
+
           />
         </header>
         <div className="process-table-container">

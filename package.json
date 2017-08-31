@@ -1,5 +1,5 @@
 {
-  "name": "electron-process-manager",
+  "name": "ssdc-electron-process-manager",
   "version": "0.0.4",
   "description": "Process manager UI for Electron applications",
   "repository": "getstation/electron-process-manager",

@@ -1,5 +1,6 @@
 import React from 'react';
 import { ipcRenderer } from 'electron';
+import { webContents } from 'electron';
 
 import ProcessTable from './ProcessTable';
 import ToolBar from './ToolBar';
@@ -27,12 +28,7 @@ export default class ProcessManager extends React.Component {
 
   canDebug() {
     if (!this.state.selectedPid) return false;
-    const pids = this.state.processData.map(p => p.pid);
-
-    // verify that select pid is in list of processes
-    //return pids.indexOf(this.state.selectedPid) !== -1;
-
-    return true;
+      return typeof this.state.webContentsId !== 'undefined';
   }
 
   handleKillProcess() {
@@ -42,9 +38,9 @@ export default class ProcessManager extends React.Component {
   }
 
   handleDebugProcess() {
-    const pid = this.state.selectedPid;
-    if (!pid) return;
-    ipcRenderer.send('process-manager:debug-process', pid);
+    if (this.state.webContentsId) {
+      ipcRenderer.send('process-manager:debug-process', this.state.webContentsId);
+    }
   }
 
   render () {
@@ -66,7 +62,7 @@ export default class ProcessManager extends React.Component {
           <ProcessTable
             processData={processData}
             selectedPid={this.state.selectedPid}
-            onSelectedPidChange={pid => this.setState({ selectedPid: pid })}
+            onSelectedPidChange={(pid,webContentsId) => this.setState({ selectedPid: pid, webContentsId:webContentsId})}
             />
         </div>
       </div>

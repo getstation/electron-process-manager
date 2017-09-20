@@ -22,7 +22,7 @@ class ProcessManager extends EventEmitter {
     this.window = new ProcessManagerWindow();
     this.window.showWhenReady();
     this.window.on('kill-process', pid => this.killProcess(pid))
-    this.window.on('debug-process', pid => this.DebugProcess(pid))
+    this.window.on('debug-process', webContentsId => this.debugProcess(webContentsId))
     this.window.on('closed', () => this.window = null)
     this.emit('open-window', this.window);
 
@@ -35,18 +35,12 @@ class ProcessManager extends EventEmitter {
     this.emit('killed-process', pid, this.window);
   }
 
-  DebugProcess(pid) {
-      const webContentsInfo =  webContents.getAllWebContents().map(wc => ({
-        pid: wc.getOSProcessId(),
-        wc: wc
-      }));
-
-      const wc = webContentsInfo.find(wc => wc.pid === pid);
-      if (wc)  {
-        this.emit('will-debug-process', pid, this.window);
-        wc.wc.openDevTools({detached: true});
-        this.emit('debugged-process', pid, this.window);
-      }
+  debugProcess(webContentsId) {
+    this.emit('will-debug-process', webContentsId, this.window);
+    const webContentsInfo =  webContents.getAllWebContents();
+    const wc = webContentsInfo.find(wc => wc.id === webContentsId);
+    wc.openDevTools({detached: true});
+    this.emit('debugged-process', webContentsId, this.window);
   }
 
 }

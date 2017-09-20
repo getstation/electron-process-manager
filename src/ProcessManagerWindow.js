@@ -48,13 +48,13 @@ class ProcessManagerWindow extends BrowserWindow {
 
       this.emit('kill-process', pid);
     });
-    ipcMain.on('process-manager:debug-process', (e, pid) => {
+    ipcMain.on('process-manager:debug-process', (e, webContentsId) => {
       // ignore if not for us
       if (!this || this.isDestroyed()) return;
       if (e.sender !== this.webContents) return;
 
 
-      this.emit('debug-process', pid);
+      this.emit('debug-process', webContentsId);
 
     });
     this.on('closed', () => reporter.stop());

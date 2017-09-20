@@ -19,6 +19,7 @@ It's inspired from Chrome's task manager.
 - [x] Memory reporting
 - [x] Link memory data to web-contents (for electron >=1.7.1)
 - [x] Kill a process from the UI
+- [x] Open developer tools for a given process
 
 ## Installation
 

@@ -31,7 +31,7 @@ export default class ProcessTable extends React.Component {
             <ProcessRow
               key={p.pid}
               {...p}
-              onSelect={() => this.props.onSelectedPidChange(p.pid,p.webContents?p.webContents[0].id:undefined)}
+              onSelect={() => this.props.onSelectedPidChange(p.pid)}
               selected={this.props.selectedPid === p.pid}
             />
           )

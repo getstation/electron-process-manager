@@ -6,8 +6,8 @@ export default class ToolBar extends React.Component {
   static propTypes = {
     onKillClick: PropTypes.func,
     disableKill: PropTypes.bool,
-    onDebugClick: PropTypes.func,
-    disableDebug: PropTypes.bool
+    onOpenDevToolClick: PropTypes.func,
+    disabelOpenDevTool: PropTypes.bool
   }
 
   render() {
@@ -23,8 +23,8 @@ export default class ToolBar extends React.Component {
               </button>
               <button
                 className="btn btn-default"
-                disabled={this.props.disableDebug}
-                onClick={this.props.onDebugClick}
+                disabled={this.props.disabelOpenDevTool}
+                onClick={this.props.onOpenDevToolClick}
               >
                 Open Dev Tool
               </button>

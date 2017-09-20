@@ -37,10 +37,10 @@ export default class ProcessManager extends React.Component {
     ipcRenderer.send('process-manager:kill-process', pid);
   }
 
-  handleDebugProcess() {
     if (this.state.webContentsId) {
       ipcRenderer.send('process-manager:debug-process', this.state.webContentsId);
     }
+  handleOpenDevTool() {
   }
 
   render () {
@@ -53,8 +53,8 @@ export default class ProcessManager extends React.Component {
           <ToolBar
             disableKill={!this.canKill()}
             onKillClick={this.handleKillProcess.bind(this)}
-            disableDebug={!this.canDebug()}
-            onDebugClick={this.handleDebugProcess.bind(this)}
+            disabelOpenDevTool={!this.canOpenDevTool()}
+            onOpenDevToolClick={this.handleOpenDevTool.bind(this)}
 
           />
         </header>

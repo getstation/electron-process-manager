@@ -26,9 +26,18 @@ export default class ProcessManager extends React.Component {
     return pids.indexOf(this.state.selectedPid) !== -1;
   }
 
-  canDebug() {
-    if (!this.state.selectedPid) return false;
-      return typeof this.state.webContentsId !== 'undefined';
+  canOpenDevTool() {
+    return this.canKill() && this.getWebContentsIdForSelectedProcess() !== null;
+  }
+
+  getWebContentsIdForSelectedProcess() {
+    const { processData, selectedPid } = this.state;
+    if (!selectedPid) return null;
+
+    const process = processData.find(p => p.pid === selectedPid);
+    if (!process || !process.webContents || process.webContents.length === 0) return null;
+
+    return process.webContents[0].id;
   }
 
   handleKillProcess() {
@@ -37,10 +46,9 @@ export default class ProcessManager extends React.Component {
     ipcRenderer.send('process-manager:kill-process', pid);
   }
 
-    if (this.state.webContentsId) {
-      ipcRenderer.send('process-manager:debug-process', this.state.webContentsId);
-    }
   handleOpenDevTool() {
+    const webContentsId = this.getWebContentsIdForSelectedProcess();
+    ipcRenderer.send('process-manager:open-dev-tools', webContentsId);
   }
 
   render () {
@@ -62,7 +70,7 @@ export default class ProcessManager extends React.Component {
           <ProcessTable
             processData={processData}
             selectedPid={this.state.selectedPid}
-            onSelectedPidChange={(pid,webContentsId) => this.setState({ selectedPid: pid, webContentsId:webContentsId})}
+            onSelectedPidChange={pid => this.setState({ selectedPid: pid })}
             />
         </div>
       </div>

@@ -26,7 +26,7 @@ export default class ToolBar extends React.Component {
                 disabled={this.props.disableDebug}
                 onClick={this.props.onDebugClick}
               >
-                Debug process
+                Open Dev Tool
               </button>
             </div>
           </div>

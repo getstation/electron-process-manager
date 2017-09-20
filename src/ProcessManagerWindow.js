@@ -1,4 +1,4 @@
-const  { app, BrowserWindow, shell, ipcMain } = require('electron');
+const  { app, BrowserWindow, shell, ipcMain,webContents } = require('electron');
 const path = require('path');
 const process = require('process');
 
@@ -47,6 +47,15 @@ class ProcessManagerWindow extends BrowserWindow {
       if (e.sender !== this.webContents) return;
 
       this.emit('kill-process', pid);
+    });
+    ipcMain.on('process-manager:debug-process', (e, webContentsId) => {
+      // ignore if not for us
+      if (!this || this.isDestroyed()) return;
+      if (e.sender !== this.webContents) return;
+
+
+      this.emit('debug-process', webContentsId);
+
     });
     this.on('closed', () => reporter.stop());
     reporter.start();

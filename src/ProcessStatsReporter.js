@@ -26,17 +26,7 @@ class ProcessStatsReporter extends EventEmitter {
       URL: wc.getURL()
     }));
 
-
-    const thisProcessPid = process.pid;
-    const thisProcessType = process.type;
-
     return processMetric.map(proc => {
-      if (proc.pid === thisProcessPid) {
-        proc.type = thisProcessType;
-      } else {
-        proc.type = 'renderer';
-      }
-
       const wc = webContentsInfo.find(wc => wc.pid === proc.pid);
       if (!wc) return proc;
 

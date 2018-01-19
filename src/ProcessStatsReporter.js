@@ -17,7 +17,7 @@ class ProcessStatsReporter extends EventEmitter {
   }
 
   getReportData() {
-    const memoryInfo = app.getAppMemoryInfo();
+    const processMetric = app.getAppMetrics();
 
     const webContentsInfo =  webContents.getAllWebContents().map(wc => ({
       type: wc.getType(),
@@ -30,7 +30,7 @@ class ProcessStatsReporter extends EventEmitter {
     const thisProcessPid = process.pid;
     const thisProcessType = process.type;
 
-    return memoryInfo.map(proc => {
+    return processMetric.map(proc => {
       if (proc.pid === thisProcessPid) {
         proc.type = thisProcessType;
       } else {

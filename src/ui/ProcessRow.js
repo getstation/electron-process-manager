@@ -1,8 +1,13 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import filesize from 'filesize';
+import format from 'format-number';
 
 const KB = 1024;
+const formatPercentage = format({
+  round: 1,
+  padRight: 1
+});
 
 export default class ProcessRow extends React.Component {
   static propTypes = {
@@ -36,6 +41,8 @@ export default class ProcessRow extends React.Component {
           <td>{filesize(this.props.memory.privateBytes*KB)}</td>
           <td>{filesize(this.props.memory.sharedBytes*KB)}</td>
           <td>{filesize(this.props.memory.workingSetSize*KB)}</td>
+          <td>{formatPercentage(this.props.cpu.percentCPUUsage)}</td>
+          <td>{this.props.cpu.idleWakeupsPerSecond}</td>
           <td></td>
           <td></td>
           <td></td>
@@ -55,6 +62,8 @@ export default class ProcessRow extends React.Component {
           <td>{filesize(this.props.memory.privateBytes*KB)}</td>
           <td>{filesize(this.props.memory.sharedBytes*KB)}</td>
           <td>{filesize(this.props.memory.workingSetSize*KB)}</td>
+          <td>{formatPercentage(this.props.cpu.percentCPUUsage)}</td>
+          <td>{this.props.cpu.idleWakeupsPerSecond}</td>
           <td>{wc.id}</td>
           <td>{wc.type}</td>
           <td>{wc.URL}</td>

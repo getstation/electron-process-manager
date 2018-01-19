@@ -20,6 +20,7 @@ It's inspired from Chrome's task manager.
 - [x] Link memory data to web-contents (for electron >=1.7.1)
 - [x] Kill a process from the UI
 - [x] Open developer tools for a given process
+- [x] CPU metrics
 
 ## Installation
 
@@ -38,7 +39,6 @@ openProcessManager();
 
 - Be able to sort columns
 - Add physical memory (noted as "Memory" in Chrome's task manager)
-- Add CPU metrics
 - Add networks metrics
 
 Pull requests welcome :)

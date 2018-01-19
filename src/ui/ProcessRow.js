@@ -19,10 +19,15 @@ export default class ProcessRow extends React.Component {
       sharedBytes: PropTypes.number,
       workingSetSize: PropTypes.number
     }),
+    cpu: PropTypes.shape({
+      percentCPUUsage: PropTypes.number,
+      idleWakeupsPerSecond: PropTypes.number
+    }),
     webContents: PropTypes.arrayOf(PropTypes.shape({
       id: PropTypes.number,
       type: PropTypes.string,
-      URL: PropTypes.string
+      URL: PropTypes.string,
+      URLDomain: PropTypes.string
     })),
     selected: PropTypes.bool,
     onSelect: PropTypes.func
@@ -37,6 +42,7 @@ export default class ProcessRow extends React.Component {
           onClick={this.props.onSelect}
         >
           <td>{this.props.pid}</td>
+          <td></td>
           <td>{this.props.type}</td>
           <td>{filesize(this.props.memory.privateBytes*KB)}</td>
           <td>{filesize(this.props.memory.sharedBytes*KB)}</td>
@@ -58,6 +64,7 @@ export default class ProcessRow extends React.Component {
           onClick={this.props.onSelect}
         >
           <td>{this.props.pid}</td>
+          <td>{wc.URLDomain}</td>
           <td>{this.props.type}</td>
           <td>{filesize(this.props.memory.privateBytes*KB)}</td>
           <td>{filesize(this.props.memory.sharedBytes*KB)}</td>

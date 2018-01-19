@@ -7,7 +7,7 @@
   "scripts": {
     "dev": "webpack -d --watch",
     "build": "webpack",
-    "example": "cd example && npm start",
+    "example": "npm run build && cd example && npm start",
     "test": "node tests/test.js",
     "prepare": "npm run build"
   },
@@ -22,11 +22,12 @@
     "bluebird": "^3.5.0",
     "bluebird-extra": "^2.0.0",
     "filesize": "^3.5.9",
+    "format-number": "^3.0.0",
+    "memoizee": "^0.4.11",
     "prop-types": "^15.5.10",
     "react": "^15.5.4",
     "react-dom": "^15.5.4",
     "spectron": "^3.6.4",
-    "webpack": "^2.5.1",
-    "format-number": "^3.0.0"
+    "webpack": "^2.5.1"
   }
 }

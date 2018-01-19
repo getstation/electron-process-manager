@@ -1,5 +1,21 @@
 const { EventEmitter } = require('events');
 const { app, webContents } = require('electron');
+const { parse } = require('url');
+const memoize = require("memoizee");
+
+const stripPathRegexp = /^.*app\.asar[\/\\](.*)$/;
+
+let URLDomain = urlString => {
+  const url = parse(urlString);
+
+  if (url.protocol == 'https:' | url.protocol == 'http:' ) {
+    return url.hostname;
+  }
+
+  return '';
+}
+// memoize it for performance
+URLDomain = memoize(URLDomain, { max: 100 });
 
 class ProcessStatsReporter extends EventEmitter {
   start() {
@@ -23,7 +39,8 @@ class ProcessStatsReporter extends EventEmitter {
       type: wc.getType(),
       id: wc.id,
       pid: wc.getOSProcessId(),
-      URL: wc.getURL()
+      URL: wc.getURL(),
+      URLDomain: URLDomain(wc.getURL())
     }));
 
     return processMetric.map(proc => {

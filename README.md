@@ -21,6 +21,7 @@ It's inspired from Chrome's task manager.
 - [x] Kill a process from the UI
 - [x] Open developer tools for a given process
 - [x] CPU metrics
+- [x] Sort by columns
 
 ## Installation
 
@@ -37,7 +38,6 @@ openProcessManager();
 
 ## Future
 
-- Be able to sort columns
 - Add physical memory (noted as "Memory" in Chrome's task manager)
 - Add networks metrics
 

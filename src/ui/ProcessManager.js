@@ -1,6 +1,6 @@
 import React from 'react';
 import { ipcRenderer } from 'electron';
-import { webContents } from 'electron';
+import objectPath from 'object-path';
 
 import ProcessTable from './ProcessTable';
 import ToolBar from './ToolBar';
@@ -9,7 +9,14 @@ export default class ProcessManager extends React.Component {
 
   constructor() {
     super();
-    this.state = { processData: null, selectedPid: null };
+    this.state = {
+      processData: null,
+      selectedPid: null,
+      sorting: {
+        path: null,
+        how: null
+      }
+    };
   }
 
   componentWillMount() {
@@ -51,6 +58,22 @@ export default class ProcessManager extends React.Component {
     ipcRenderer.send('process-manager:open-dev-tools', webContentsId);
   }
 
+  getProcessData() {
+    const { processData, sorting } = this.state;
+
+    if (!sorting.path || !sorting.how) return processData;
+
+    return processData.sort((p1, p2) => {
+      const p1Metric = objectPath.get(p1, sorting.path);
+      const p2Metric = objectPath.get(p2, sorting.path);
+      
+      if (p1Metric === p2Metric) return 0;
+      const comp =  p1Metric < p2Metric ? -1 : 1;
+
+      return sorting.how == 'ascending' ? comp : -comp;
+    });
+  }
+
   render () {
     const { processData } = this.state;
     if (!processData) return (<span>No data</span>);
@@ -68,8 +91,10 @@ export default class ProcessManager extends React.Component {
         </header>
         <div className="process-table-container">
           <ProcessTable
-            processData={processData}
+            processData={this.getProcessData()}
             selectedPid={this.state.selectedPid}
+            sorting={this.state.sorting}
+            onSortingChange={sorting => this.setState({ sorting })}
             onSelectedPidChange={pid => this.setState({ selectedPid: pid })}
             />
         </div>

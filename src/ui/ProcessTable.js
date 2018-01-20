@@ -2,11 +2,17 @@ import React from 'react';
 import PropTypes from 'prop-types';
 
 import ProcessRow from './ProcessRow';
+import ProcessTableHeader from './ProcessTableHeader';
 
 export default class ProcessTable extends React.Component {
   static propTypes = {
     processData: PropTypes.arrayOf(PropTypes.object),
     selectedPid: PropTypes.number,
+    sorting: PropTypes.PropTypes.shape({
+      path: PropTypes.string,
+      how: PropTypes.string
+    }),
+    onSortingChange: PropTypes.func,
     onSelectedPidChange: PropTypes.func
   }
 
@@ -15,17 +21,71 @@ export default class ProcessTable extends React.Component {
       <table className="process-table table-striped">
         <thead>
           <tr>
-            <th>Pid</th>
-            <th>WebContents Domain</th>
-            <th>Process Type</th>
-            <th>Private Memory</th>
-            <th>Shared Memory</th>
-            <th>Working Set Size</th>
-            <th>% CPU</th>
-            <th>Idle Wake Ups /s</th>
-            <th>WebContents Id</th>
-            <th>WebContents Type</th>
-            <th>WebContents URL</th>
+            <ProcessTableHeader
+              path='pid'
+              sorting={this.props.sorting}
+              onSortingChange={this.props.onSortingChange}
+            >Pid</ProcessTableHeader>
+
+            <ProcessTableHeader
+              path='webContents.0.URLDomain'
+              sorting={this.props.sorting}
+              onSortingChange={this.props.onSortingChange}
+            >WebContents Domain</ProcessTableHeader>
+
+            <ProcessTableHeader
+              path='webContents.0.type'
+              sorting={this.props.sorting}
+              onSortingChange={this.props.onSortingChange}
+            >Process Type</ProcessTableHeader>
+
+            <ProcessTableHeader
+              path='memory.privateBytes'
+              sorting={this.props.sorting}
+              onSortingChange={this.props.onSortingChange}
+            >Private Memory</ProcessTableHeader>
+
+            <ProcessTableHeader
+              path='memory.sharedBytes'
+              sorting={this.props.sorting}
+              onSortingChange={this.props.onSortingChange}
+            >Shared Memory</ProcessTableHeader>
+
+            <ProcessTableHeader
+              path='memory.workingSetSize'
+              sorting={this.props.sorting}
+              onSortingChange={this.props.onSortingChange}
+            >Working Set Size</ProcessTableHeader>
+
+            <ProcessTableHeader
+              path='cpu.percentCPUUsage'
+              sorting={this.props.sorting}
+              onSortingChange={this.props.onSortingChange}
+            >% CPU</ProcessTableHeader>
+
+            <ProcessTableHeader
+              path='cpu.idleWakeupsPerSecond'
+              sorting={this.props.sorting}
+              onSortingChange={this.props.onSortingChange}
+            >Idle Wake Ups /s</ProcessTableHeader>
+
+            <ProcessTableHeader
+              path='webContents.0.id'
+              sorting={this.props.sorting}
+              onSortingChange={this.props.onSortingChange}
+            >WebContents Id</ProcessTableHeader>
+
+            <ProcessTableHeader
+              path='webContents.0.type'
+              sorting={this.props.sorting}
+              onSortingChange={this.props.onSortingChange}
+            >WebContents Type</ProcessTableHeader>
+
+            <ProcessTableHeader
+              path='webContents.0.URL'
+              sorting={this.props.sorting}
+              onSortingChange={this.props.onSortingChange}
+            >WebContents URL</ProcessTableHeader>
           </tr>
         </thead>
         <tbody>

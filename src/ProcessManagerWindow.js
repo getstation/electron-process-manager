@@ -2,7 +2,7 @@ const  { app, BrowserWindow, shell, ipcMain,webContents } = require('electron');
 const path = require('path');
 const process = require('process');
 
-const ProcessStatsReporter = require('./ProcessStatsReporter.js');
+const { ProcessStatsReporter } = require('electron-process-reporter');
 
 class ProcessManagerWindow extends BrowserWindow {
 
@@ -40,7 +40,7 @@ class ProcessManagerWindow extends BrowserWindow {
 
   attachProcessReporter() {
     const reporter = this.reporter;
-    reporter.on('data', data => this.sendStatsReport(data))
+    reporter.on('report', data => this.sendStatsReport(data))
     ipcMain.on('process-manager:kill-process', (e, pid) => {
       // ignore if not for us
       if (!this || this.isDestroyed()) return;

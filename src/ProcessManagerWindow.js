@@ -2,7 +2,7 @@ const  { app, BrowserWindow, shell, ipcMain,webContents } = require('electron');
 const path = require('path');
 const process = require('process');
 
-const { ProcessStatsReporter } = require('electron-process-reporter');
+const { onProcessMetricReport } = require('electron-process-reporter');
 
 class ProcessManagerWindow extends BrowserWindow {
 
@@ -16,7 +16,6 @@ class ProcessManagerWindow extends BrowserWindow {
     super(winOptions);
     this.options = options;
 
-    this.reporter = new ProcessStatsReporter();
     this.attachProcessReporter();
 
     const indexHtml = 'file://' + path.join(__dirname, '..', 'process-manager.html');
@@ -39,8 +38,8 @@ class ProcessManagerWindow extends BrowserWindow {
   }
 
   attachProcessReporter() {
-    const reporter = this.reporter;
-    reporter.on('report', data => this.sendStatsReport(data))
+    this.subscription = onProcessMetricReport(app)
+      .subscribe(report => this.sendStatsReport(report))
     ipcMain.on('process-manager:kill-process', (e, pid) => {
       // ignore if not for us
       if (!this || this.isDestroyed()) return;
@@ -57,8 +56,9 @@ class ProcessManagerWindow extends BrowserWindow {
       this.emit('open-dev-tools', webContentsId);
 
     });
-    this.on('closed', () => reporter.stop());
-    reporter.start();
+    this.on('closed', () => { 
+      if (this.subscription) this.subscription.unsubscribe()
+    });
   }
 }
 

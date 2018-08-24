@@ -39,7 +39,7 @@ class ProcessManager extends EventEmitter {
     this.emit('will-open-dev-tools', webContentsId, this.window);
 
     const wc = webContents.fromId(webContentsId);
-    wc.openDevTools({ detached: true });
+    wc.openDevTools({mode: 'detach'});
 
     this.emit('did-open-dev-tools', webContentsId, this.window);
   }

@@ -8,7 +8,8 @@
     "dev": "webpack -d --watch",
     "build": "webpack",
     "example": "npm run build && cd example && npm start",
-    "test": "node tests/test.js",
+    "test": "npm run build && node tests/test.js",
+    "prepublishOnly": "npm run test",
     "prepare": "npm run build"
   },
   "author": "",
@@ -21,6 +22,8 @@
     "babel-preset-stage-0": "^6.24.1",
     "bluebird": "^3.5.0",
     "bluebird-extra": "^2.0.0",
+    "electron": "2.0.2",
+    "electron-default-menu": "1.0.1",
     "filesize": "^3.5.9",
     "format-number": "^3.0.0",
     "object-path": "^0.11.4",
@@ -29,6 +32,9 @@
     "react-dom": "^15.5.4",
     "spectron": "^3.6.4",
     "webpack": "^2.5.1"
+  },
+  "peerDependencies": {
+    "electron": ">=17.1 <3.x.x"
   },
   "dependencies": {
     "electron-process-reporter": "^1.2.1"

@@ -1,0 +1,7 @@
+{
+  "name": "electron-process-manager-example-app",
+  "version": "0.0.1",
+  "description": "An example application for electron-process-manager module",
+  "main": "main.js",
+  "private": true
+}

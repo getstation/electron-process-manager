@@ -8,7 +8,7 @@ It opens a window displaying a table of every processes run by the Electron appl
 
 ![screenshot](https://github.com/getstation/electron-process-manager/raw/master/.github/screenshots/window.png)
 
-:warning: For Electron >=1.7.1
+:warning: For `@electron>=1.7.1` and `@electron<3.0.0`
 
 It can be useful to debug performance of an app with several `webview`.
 
@@ -34,6 +34,35 @@ $ npm install electron-process-manager
 const { openProcessManager } = require('electron-process-manager');
 
 openProcessManager();
+```
+
+## Options
+`openProcessManager` function can take options in paramters
+
+#### options.defaultSorting
+**defaultSorting.how**: `'ascending' | 'descending'`
+
+**defaultSorting.path**:
+
+| Field name         | path                       |
+|--------------------|----------------------------|
+| Pid                | 'pid'                      |
+| WebContents Domain | 'webContents.0.URLDomain'  |
+| Process Type       | 'webContents.0.type'       |
+| Private Memory     | 'memory.privateBytes'      |
+| Shared Memory      | 'memory.sharedBytes'       |
+| Working Set Size   | 'memory.workingSetSize'    |
+| % CPU              | 'cpu.percentCPUUSage'      |
+| Idle Wake Ups /s   | 'cpu.idleWakeupsPerSecond' |
+| WebContents Id     | 'webContents.0.id'         |
+| WebContents Type   | 'webContents.0.type'       |
+| WebContents URL    | 'webContents.0.URL'        |
+
+example:
+```js
+const { openProcessManager } = require('electron-process-manager');
+
+openProcessManager({ how: 'descending', path: 'cpu.percentCPUUsage' });
 ```
 
 ## Future

@@ -6,7 +6,7 @@ const { setUpApp } = require('./utils');
 
 const app = new Application({
   env: { TEST_PROCESS_MANAGER: 1 },
-  path: require(join(__dirname, '../example/node_modules/electron')),
+  path: require(join(__dirname, '../node_modules/electron')),
   args: [join(__dirname, '../example/main.js')]
 });
 

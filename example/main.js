@@ -1,7 +1,7 @@
 var { app, shell, BrowserWindow, Menu, ipcMain } = require('electron');
 var join = require('path').join;
 
-var processManager  = require('electron-process-manager');
+var processManager  = require('..');
 const defaultMenu = require('electron-default-menu');
 
 processManager.on('killed-process', pid => console.log('Killed process', pid));

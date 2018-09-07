@@ -1,5 +1,5 @@
 import React from 'react';
-import { ipcRenderer, remote } from 'electron';
+import { ipcRenderer } from 'electron';
 import objectPath from 'object-path';
 
 import ProcessTable from './ProcessTable';
@@ -20,7 +20,6 @@ export default class ProcessManager extends React.Component {
   }
 
   componentWillMount() {
-    this.setState({ sorting: remote.getCurrentWindow().defaultSorting });
     ipcRenderer.on('process-manager:data', (_, data) => {
       this.setState({ processData: data });
     })
@@ -67,7 +66,7 @@ export default class ProcessManager extends React.Component {
     return processData.sort((p1, p2) => {
       const p1Metric = objectPath.get(p1, sorting.path);
       const p2Metric = objectPath.get(p2, sorting.path);
-
+      
       if (p1Metric === p2Metric) return 0;
       const comp =  p1Metric < p2Metric ? -1 : 1;
 

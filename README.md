@@ -52,7 +52,7 @@ openProcessManager();
 | Private Memory     | 'memory.privateBytes'      |
 | Shared Memory      | 'memory.sharedBytes'       |
 | Working Set Size   | 'memory.workingSetSize'    |
-| % CPU              | 'cpu.percentCPUUSage'      |
+| % CPU              | 'cpu.percentCPUUsage'      |
 | Idle Wake Ups /s   | 'cpu.idleWakeupsPerSecond' |
 | WebContents Id     | 'webContents.0.id'         |
 | WebContents Type   | 'webContents.0.type'       |

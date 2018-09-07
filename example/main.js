@@ -21,7 +21,7 @@ app.once('ready', function() {
             label: 'Open Process Manager',
             click: () => processManager.open({
               defaultSorting: {
-                path: 'cpu.percentCPUUSage',
+                path: 'cpu.percentCPUUsage',
                 how: 'descending'
             }})
           })

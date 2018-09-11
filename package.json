@@ -1,6 +1,6 @@
 {
   "name": "electron-process-manager",
-  "version": "0.5.1",
+  "version": "0.6.0-rc0",
   "description": "Process manager UI for Electron applications",
   "repository": "getstation/electron-process-manager",
   "main": "src/index.js",

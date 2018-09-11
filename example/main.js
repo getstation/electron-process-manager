@@ -19,7 +19,11 @@ app.once('ready', function() {
         if(menu.label === 'Window') {
           menu.submenu.push({
             label: 'Open Process Manager',
-            click: () => processManager.open()
+            click: () => processManager.open({
+              defaultSorting: {
+                path: 'cpu.percentCPUUsage',
+                how: 'descending'
+            }})
           })
         }
         return menu;

@@ -22,7 +22,7 @@ app.start()
   .then(() => app.client.waitForVisible('#app .process-table'))
   .then(() => app.stop())
   .catch(function (error) {
-    console.error('Test failed', error.message);
+    console.error('Test failed', error);
     if (app && app.isRunning()) {
       app.stop().then(() => process.exit(1))
     } else process.exit(1);

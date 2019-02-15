@@ -9,7 +9,6 @@
     "build": "webpack",
     "example": "npm run build && electron example",
     "test": "npm run build && node tests/test.js",
-    "prepublishOnly": "npm run test",
     "prepare": "npm run build"
   },
   "author": "",

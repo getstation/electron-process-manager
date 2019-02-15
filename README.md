@@ -8,7 +8,7 @@ It opens a window displaying a table of every processes run by the Electron appl
 
 ![screenshot](https://github.com/getstation/electron-process-manager/raw/master/.github/screenshots/window.png)
 
-:warning: For `@electron>=1.7.1` and `@electron<3.0.0`
+:warning: For `@electron>=3.0.0`
 
 It can be useful to debug performance of an app with several `webview`.
 
@@ -16,12 +16,14 @@ It's inspired from Chrome's task manager.
 
 ## Features
 
-- [x] Memory reporting
-- [x] Link memory data to web-contents (for electron >=1.7.1)
+- [ ] Memory reporting
+- [ ] Link memory data to web-contents (for electron >=1.7.1)
 - [x] Kill a process from the UI
 - [x] Open developer tools for a given process
 - [x] CPU metrics
 - [x] Sort by columns
+
+⚠️ Unfortunately, memory info are no longer available in Electron>=4 (see [electron/electron#16179](https://github.com/electron/electron/issues/16179))
 
 ## Installation
 

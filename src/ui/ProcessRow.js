@@ -34,7 +34,7 @@ export default class ProcessRow extends React.Component {
   }
 
   render() {
-    const { webContents } = this.props;
+    const { webContents, memory } = this.props;
     if (!webContents || webContents.length === 0) {
       return (
         <tr
@@ -44,9 +44,9 @@ export default class ProcessRow extends React.Component {
           <td>{this.props.pid}</td>
           <td></td>
           <td>{this.props.type}</td>
-          <td>{filesize(this.props.memory.privateBytes*KB)}</td>
-          <td>{filesize(this.props.memory.sharedBytes*KB)}</td>
-          <td>{filesize(this.props.memory.workingSetSize*KB)}</td>
+          <td>{memory ? filesize(memory.privateBytes*KB) : 'N/A'}</td>
+          <td>{memory ? filesize(memory.sharedBytes*KB) : 'N/A'}</td>
+          <td>{memory ? filesize(memory.workingSetSize*KB) : 'N/A'}</td>
           <td>{formatPercentage(this.props.cpu.percentCPUUsage)}</td>
           <td>{this.props.cpu.idleWakeupsPerSecond}</td>
           <td></td>
@@ -66,9 +66,9 @@ export default class ProcessRow extends React.Component {
           <td>{this.props.pid}</td>
           <td>{wc.URLDomain}</td>
           <td>{this.props.type}</td>
-          <td>{filesize(this.props.memory.privateBytes*KB)}</td>
-          <td>{filesize(this.props.memory.sharedBytes*KB)}</td>
-          <td>{filesize(this.props.memory.workingSetSize*KB)}</td>
+          <td>{memory ? filesize(memory.privateBytes*KB) : 'N/A'}</td>
+          <td>{memory ? filesize(memory.sharedBytes*KB) : 'N/A'}</td>
+          <td>{memory ? filesize(memory.workingSetSize*KB) : 'N/A'}</td>
           <td>{formatPercentage(this.props.cpu.percentCPUUsage)}</td>
           <td>{this.props.cpu.idleWakeupsPerSecond}</td>
           <td>{wc.id}</td>

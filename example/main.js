@@ -1,35 +1,42 @@
 var { app, shell, BrowserWindow, Menu, ipcMain } = require('electron');
 var join = require('path').join;
 
-var processManager  = require('..');
+var processManager = require('..');
 const defaultMenu = require('electron-default-menu');
 
 processManager.on('killed-process', pid => console.log('Killed process', pid));
 
-app.once('window-all-closed',function() { app.quit(); });
+app.once('window-all-closed', function () { app.quit(); });
 
-app.once('ready', function() {
-    var w = new BrowserWindow();
-    w.once('closed', function() { w = null; });
-    w.loadURL('file://' + join(__dirname, 'index.html'));
+app.once('ready', function () {
+  var w = new BrowserWindow({
+    webPreferences: {
+      nodeIntegration: true,
+      webviewTag: true,
+      contextIsolation: false,
+    },
+  });
+  w.once('closed', function () { w = null; });
+  w.loadURL('file://' + join(__dirname, 'index.html'));
 
-    const menu =
-      defaultMenu(app, shell)
+  const menu =
+    defaultMenu(app, shell)
       .map(menu => {
-        if(menu.label === 'Window') {
+        if (menu.label === 'Window') {
           menu.submenu.push({
             label: 'Open Process Manager',
             click: () => processManager.open({
               defaultSorting: {
                 path: 'cpu.percentCPUUsage',
                 how: 'descending'
-            }})
+              }
+            })
           })
         }
         return menu;
       });
 
-   Menu.setApplicationMenu(Menu.buildFromTemplate(menu));
+  Menu.setApplicationMenu(Menu.buildFromTemplate(menu));
 });
 
 if (process.env.TEST_PROCESS_MANAGER) {

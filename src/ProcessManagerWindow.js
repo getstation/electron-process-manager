@@ -1,4 +1,4 @@
-const  { app, BrowserWindow, shell, ipcMain,webContents } = require('electron');
+const { app, BrowserWindow, shell, ipcMain, webContents } = require('electron');
 const path = require('path');
 const process = require('process');
 
@@ -10,7 +10,11 @@ class ProcessManagerWindow extends BrowserWindow {
     const winOptions = Object.assign({
       width: 800,
       height: 300,
-      useContentSize: true
+      useContentSize: true,
+      webPreferences: {
+        nodeIntegration: true,
+        webviewTag: true,
+      }
     }, options || {});
 
     super(winOptions);
@@ -56,7 +60,7 @@ class ProcessManagerWindow extends BrowserWindow {
       this.emit('open-dev-tools', webContentsId);
 
     });
-    this.on('closed', () => { 
+    this.on('closed', () => {
       if (this.subscription) this.subscription.unsubscribe()
     });
   }

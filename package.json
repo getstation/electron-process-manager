@@ -21,7 +21,7 @@
     "babel-preset-stage-0": "^6.24.1",
     "bluebird": "^3.5.0",
     "bluebird-extra": "^2.0.0",
-    "electron": "^4.0.4",
+    "electron": "^5.0.0",
     "electron-default-menu": "1.0.1",
     "filesize": "^3.5.9",
     "format-number": "^3.0.0",

@@ -7,8 +7,8 @@ import ToolBar from './ToolBar';
 
 export default class ProcessManager extends React.Component {
 
-  constructor() {
-    super();
+  constructor(props) {
+    super(props);
     this.state = {
       processData: null,
       selectedPid: null,
@@ -19,9 +19,10 @@ export default class ProcessManager extends React.Component {
     };
   }
 
-  componentWillMount() {
+  UNSAFE_componentWillMount() {
     this.setState({ sorting: remote.getCurrentWindow().defaultSorting });
     ipcRenderer.on('process-manager:data', (_, data) => {
+      console.log('GUY', data)
       this.setState({ processData: data });
     })
   }

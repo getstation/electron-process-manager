@@ -3,8 +3,8 @@ import PropTypes from 'prop-types';
 
 
 export default class ProcessTableHeader extends React.Component {
-  constructor() {
-    super();
+  constructor(props) {
+    super(props);
     this.handleClick = this.handleClick.bind(this);
   }
   static propTypes = {
@@ -26,7 +26,7 @@ export default class ProcessTableHeader extends React.Component {
 
   get sortHow() {
     if (!this.props.sorting) return null;
-    
+
     if (this.props.sorting.path == this.props.path){
       return this.props.sorting.how;
     }

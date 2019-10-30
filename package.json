@@ -14,12 +14,12 @@
   "author": "",
   "license": "MIT",
   "devDependencies": {
-    "babel-core": "^6.24.1",
-    "babel-loader": "^7.0.0",
+    "babel-core": "^6.26.3",
+    "babel-loader": "^7.1.5",
     "babel-preset-es2015": "^6.24.1",
     "babel-preset-react": "^6.24.1",
     "babel-preset-stage-0": "^6.24.1",
-    "bluebird": "^3.5.4",
+    "bluebird": "^3.7.1",
     "bluebird-extra": "^2.0.0",
     "electron": "^7.0.0",
     "electron-default-menu": "1.0.1",
@@ -29,7 +29,7 @@
     "prop-types": "^15.5.10",
     "react": "^16.11.0",
     "react-dom": "^16.11.0",
-    "spectron": "^5.0.0",
+    "spectron": "^9.0.0",
     "webpack": "^2.5.1"
   },
   "peerDependencies": {
@@ -37,8 +37,5 @@
   },
   "dependencies": {
     "electron-process-reporter": "^1.4.0"
-  },
-  "resolutions": {
-    "spectron/**/electron-chromedriver": "^4.0.0-beta.1"
   }
 }

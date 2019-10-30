@@ -1,8 +1,6 @@
 const Application = require('spectron').Application;
 const { join } = require('path');
-const assert = require('assert')
-
-const { setUpApp } = require('./utils');
+const assert = require('assert');
 
 const app = new Application({
   env: { TEST_PROCESS_MANAGER: 1 },
@@ -11,14 +9,11 @@ const app = new Application({
 });
 
 app.start()
-  .then(() => {
-    setUpApp(app);
-    return app.client.waitUntilWindowLoaded();
-  })
+  .then(() => app.client.waitUntilWindowLoaded())
   .then(() => app.electron.ipcRenderer.send('open-process-manager'))
   .then(() => app.client.waitUntilWindowLoaded())
   .then(() => assert(app.client.getWindowCount(), 2))
-  .then(() => app.client.changeFocusToMatchingURL(/process-manager\.html/))
+  .then(() => app.client.switchWindow(/process-manager\.html/))
   .then(() => app.client.waitForVisible('#app .process-table'))
   .then(() => app.stop())
   .catch(function (error) {
@@ -26,4 +21,4 @@ app.start()
     if (app && app.isRunning()) {
       app.stop().then(() => process.exit(1))
     } else process.exit(1);
-  })
+  });

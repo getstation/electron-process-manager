@@ -33,7 +33,6 @@ export default class ProcessRow extends React.Component {
 
   render() {
     const { webContents, memory } = this.props;
-    console.log(this.props);
     if (!webContents || webContents.length === 0) {
       return (
         <tr

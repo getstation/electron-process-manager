@@ -8,7 +8,8 @@ It opens a window displaying a table of every processes run by the Electron appl
 
 ![screenshot](https://github.com/getstation/electron-process-manager/raw/master/.github/screenshots/window.png)
 
-:warning: For `@electron>=3.0.0`
+:warning: For `@electron>=3.0.0, <7.x`, use version `0.7.1` of this package.
+For versions `>=7.x`, use latest.
 
 It can be useful to debug performance of an app with several `webview`.
 

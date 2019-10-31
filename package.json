@@ -1,6 +1,6 @@
 {
   "name": "electron-process-manager",
-  "version": "0.7.1",
+  "version": "1.0.0",
   "description": "Process manager UI for Electron applications",
   "repository": "getstation/electron-process-manager",
   "main": "src/index.js",
@@ -14,31 +14,28 @@
   "author": "",
   "license": "MIT",
   "devDependencies": {
-    "babel-core": "^6.24.1",
-    "babel-loader": "^7.0.0",
-    "babel-preset-es2015": "^6.24.1",
-    "babel-preset-react": "^6.24.1",
-    "babel-preset-stage-0": "^6.24.1",
-    "bluebird": "^3.5.4",
+    "@babel/core": "^7.0.0",
+    "@babel/plugin-proposal-class-properties": "^7.0.0",
+    "@babel/preset-env": "^7.0.0",
+    "@babel/preset-react": "^7.0.0",
+    "babel-loader": "^8.0.0",
+    "bluebird": "^3.7.1",
     "bluebird-extra": "^2.0.0",
-    "electron": "^5.0.0",
+    "electron": "^7.0.0",
     "electron-default-menu": "1.0.1",
-    "filesize": "^3.5.11",
+    "filesize": "^5.0.3",
     "format-number": "^3.0.0",
     "object-path": "^0.11.4",
     "prop-types": "^15.5.10",
-    "react": "^15.5.4",
-    "react-dom": "^15.5.4",
-    "spectron": "^5.0.0",
+    "react": "^16.11.0",
+    "react-dom": "^16.11.0",
+    "spectron": "^9.0.0",
     "webpack": "^2.5.1"
   },
   "peerDependencies": {
-    "electron": ">=1.7.1"
+    "electron": "^7.0.0"
   },
   "dependencies": {
     "electron-process-reporter": "^1.4.0"
-  },
-  "resolutions": {
-    "spectron/**/electron-chromedriver": "^4.0.0-beta.1"
   }
 }

@@ -40,18 +40,6 @@ export default class ProcessTable extends React.Component {
             >Process Type</ProcessTableHeader>
 
             <ProcessTableHeader
-              path='memory.privateBytes'
-              sorting={this.props.sorting}
-              onSortingChange={this.props.onSortingChange}
-            >Private Memory</ProcessTableHeader>
-
-            <ProcessTableHeader
-              path='memory.sharedBytes'
-              sorting={this.props.sorting}
-              onSortingChange={this.props.onSortingChange}
-            >Shared Memory</ProcessTableHeader>
-
-            <ProcessTableHeader
               path='memory.workingSetSize'
               sorting={this.props.sorting}
               onSortingChange={this.props.onSortingChange}

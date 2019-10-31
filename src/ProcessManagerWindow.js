@@ -1,7 +1,5 @@
-const { app, BrowserWindow, shell, ipcMain, webContents } = require('electron');
+const { app, BrowserWindow, ipcMain } = require('electron');
 const path = require('path');
-const process = require('process');
-
 const { onExtendedProcessMetrics } = require('electron-process-reporter');
 
 class ProcessManagerWindow extends BrowserWindow {

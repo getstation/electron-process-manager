@@ -2,12 +2,20 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import filesize from 'filesize';
 import format from 'format-number';
-
+import { basename } from 'path';
 const KB = 1024;
 const formatPercentage = format({
   round: 1,
   padRight: 1
 });
+
+function getNameFromURL(url) {
+    if (url.includes('file://')) {
+        return `${basename(url, '.html')} - Container`
+    } else {
+        return '';
+    }
+}
 
 export default class ProcessRow extends React.Component {
   static propTypes = {
@@ -60,7 +68,7 @@ export default class ProcessRow extends React.Component {
           onClick={this.props.onSelect}
         >
           <td>{this.props.pid}</td>
-          <td>{wc.URLDomain}</td>
+          <td>{wc.URLDomain || getNameFromURL(wc.URL)}</td>
           <td>{this.props.type}</td>
           <td>{memory ? filesize(memory.workingSetSize*KB) : 'N/A'}</td>
           <td>{formatPercentage(this.props.cpu.percentCPUUsage)}</td>

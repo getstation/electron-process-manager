@@ -29,7 +29,7 @@ It's inspired from Chrome's task manager.
 ## Installation
 
 ```bash
-$ npm install electron-process-manager
+$ npm install @syed_umair/electron-process-manager
 ```
 
 ## Usage
@@ -70,7 +70,7 @@ openProcessManager({ how: 'descending', path: 'cpu.percentCPUUsage' });
 
 ## Future
 
-- Add physical memory (noted as "Memory" in Chrome's task manager)
+- Add memory (noted as "Memory" in Chrome's task manager)
 - Add networks metrics
 
 Pull requests welcome :)

@@ -1,4 +1,10 @@
 /.git
+/.github
 /example
-npm-debug.log
 node_modules
+src/ui/
+/tests
+.babelrc
+.gitignore
+webpack.config.js
+npm-debug.log

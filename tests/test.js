@@ -15,6 +15,7 @@ app.start()
   .then(() => assert(app.client.getWindowCount(), 2))
   .then(() => app.client.switchWindow(/process-manager\.html/))
   .then(() => app.client.waitForVisible('#app .process-table'))
+  .then(() => new Promise(res => setTimeout(res, 5000)))
   .then(() => app.stop())
   .catch(function (error) {
     console.error('Test failed', error);

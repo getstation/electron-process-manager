@@ -4,13 +4,14 @@ const path = require('path');
 const BUILD_DIR = path.resolve(__dirname, 'dist');
 
 const config = {
+  mode: 'production',
   entry: path.resolve(__dirname, 'src/ui/index.js'),
   output: {
     path: BUILD_DIR,
     filename: 'ui-bundle.js'
   },
   module : {
-    loaders : [
+    rules: [
       {
         test: /\.(jsx|js)?$/,
         loader : 'babel-loader',

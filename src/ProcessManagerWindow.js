@@ -13,6 +13,7 @@ class ProcessManagerWindow extends BrowserWindow {
         nodeIntegration: true,
         webviewTag: true,
         enableRemoteModule: true,
+        contextIsolation: false
       }
     }, options || {});
 

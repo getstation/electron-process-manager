@@ -21,7 +21,7 @@
     "babel-loader": "^8.0.0",
     "bluebird": "^3.7.1",
     "bluebird-extra": "^2.0.0",
-    "electron": "^7.0.0",
+    "electron": "^13.6.6",
     "electron-default-menu": "1.0.1",
     "filesize": "^5.0.3",
     "format-number": "^3.0.0",
@@ -33,7 +33,7 @@
     "webpack": "^2.5.1"
   },
   "peerDependencies": {
-    "electron": "^7.0.0"
+    "electron": "^13.6.6"
   },
   "dependencies": {
     "electron-process-reporter": "^1.4.0"

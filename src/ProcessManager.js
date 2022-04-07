@@ -1,6 +1,6 @@
 const { EventEmitter } = require('events');
 const process = require('process');
-const  { webContents } = require('electron');
+const { webContents } = require('electron');
 
 var ProcessManagerWindow = require('./ProcessManagerWindow.js');
 

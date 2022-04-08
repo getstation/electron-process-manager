@@ -1,6 +1,6 @@
 const { EventEmitter } = require('events');
 const process = require('process');
-const { webContents } = require('electron');
+const { webContents, ipcMain } = require('electron');
 
 var ProcessManagerWindow = require('./ProcessManagerWindow.js');
 
@@ -27,6 +27,9 @@ class ProcessManager extends EventEmitter {
     this.window.on('open-dev-tools', webContentsId => this.openDevTools(webContentsId))
     this.window.on('closed', () => this.window = null)
     this.emit('open-window', this.window);
+    ipcMain.handle('get-default-sorting', () => {
+        return this.window.defaultSorting;
+    });
 
     return this.window;
   }

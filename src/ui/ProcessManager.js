@@ -1,6 +1,5 @@
 import React from 'react';
 import { ipcRenderer } from 'electron';
-import { getCurrentWindow } from '@electron/remote';
 import objectPath from 'object-path';
 
 import ProcessTable from './ProcessTable';
@@ -21,7 +20,9 @@ export default class ProcessManager extends React.Component {
   }
 
   UNSAFE_componentWillMount() {
-    this.setState({ sorting: getCurrentWindow().defaultSorting });
+    ipcRenderer.invoke('get-default-sorting').then((sorting) => {
+        this.setState({ sorting });
+    });
     ipcRenderer.on('process-manager:data', (_, data) => {
       this.setState({ processData: data });
     })

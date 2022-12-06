@@ -1,6 +1,6 @@
 {
   "name": "@syed_umair/electron-process-manager",
-  "version": "1.0.8",
+  "version": "1.0.9",
   "description": "Process manager UI for Electron applications",
   "main": "src/index.js",
   "scripts": {
@@ -20,7 +20,7 @@
     "babel-loader": "^8.1.0",
     "bluebird": "^3.7.2",
     "bluebird-extra": "^2.0.0",
-    "electron": "^21.1.0",
+    "electron": "^21.3.0",
     "electron-default-menu": "1.0.2",
     "filesize": "^6.1.0",
     "format-number": "^3.0.0",
@@ -32,7 +32,7 @@
     "webpack-cli": "^3.3.12"
   },
   "peerDependencies": {
-    "electron": "^17.3.0"
+    "electron": "^21.3.0"
   },
   "dependencies": {
     "electron-process-reporter": "^1.4.0"

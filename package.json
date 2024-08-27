@@ -33,6 +33,6 @@
     "webpack-cli": "^3.3.12"
   },
   "dependencies": {
-    "electron-process-reporter": "https://github.com/viktor44/electron-process-reporter/releases/download/v1.5.0/release.tar.gz"
+    "@getstation/electron-process-reporter": "^2.0.0"
   }
 }

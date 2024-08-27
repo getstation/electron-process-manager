@@ -1,6 +1,6 @@
 const { app, BrowserWindow, ipcMain } = require('electron');
 const path = require('path');
-const { onExtendedProcessMetrics } = require('electron-process-reporter');
+const { onExtendedProcessMetrics } = require('@getstation/electron-process-reporter');
 
 class ProcessManagerWindow extends BrowserWindow {
 
@@ -11,7 +11,6 @@ class ProcessManagerWindow extends BrowserWindow {
       useContentSize: true,
       webPreferences: {
         nodeIntegration: true,
-        webviewTag: true,
         contextIsolation: false,
       }
     }, options || {});
@@ -25,42 +24,53 @@ class ProcessManagerWindow extends BrowserWindow {
     this.loadURL(indexHtml);
   }
 
-  showWhenReady() {
+  showWhenReady = () => {
     this.once('ready-to-show', () => {
       this.show();
     });
   }
 
-  sendStatsReport(reportData) {
+  sendStatsReport = (reportData) => {
     if (!this.webContents) return;
     this.webContents.send('process-manager:data', reportData);
   }
 
-  openDevTools() {
+  openDevTools = () => {
     this.webContents.openDevTools();
   }
 
-  attachProcessReporter() {
+  onOpenDevTools = (e, webContentsId) => {
+    // ignore if not for us
+    if (!this || this.isDestroyed()) return;
+    if (e.sender !== this.webContents) return;
+
+    this.emit('open-dev-tools', webContentsId);
+  }
+
+  onKillProcess = (e, pid) => {
+    // ignore if not for us
+    if (!this || this.isDestroyed()) return;
+    if (e.sender !== this.webContents) return;
+
+    this.emit('kill-process', pid);
+  }
+
+  attachProcessReporter = () => {
     this.subscription = onExtendedProcessMetrics(app)
       .subscribe(report => this.sendStatsReport(report))
-    ipcMain.on('process-manager:kill-process', (e, pid) => {
-      // ignore if not for us
-      if (!this || this.isDestroyed()) return;
-      if (e.sender !== this.webContents) return;
-
-      this.emit('kill-process', pid);
+    ipcMain.on('process-manager:kill-process', this.onKillProcess);
+    ipcMain.on('process-manager:open-dev-tools', this.onOpenDevTools);
+    ipcMain.handle('process-manager:defaultSorting', () => {
+      return this.options.defaultSorting;
     });
-    ipcMain.on('process-manager:open-dev-tools', (e, webContentsId) => {
-      // ignore if not for us
-      if (!this || this.isDestroyed()) return;
-      if (e.sender !== this.webContents) return;
 
-
-      this.emit('open-dev-tools', webContentsId);
-
-    });
     this.on('closed', () => {
-      if (this.subscription) this.subscription.unsubscribe()
+      if (this.subscription) {
+        this.subscription.unsubscribe();
+      }
+      ipcMain.removeHandler('process-manager:defaultSorting');
+      ipcMain.off('process-manager:kill-process', this.onKillProcess);
+      ipcMain.off('process-manager:open-dev-tools', this.onOpenDevTools);
     });
   }
 }

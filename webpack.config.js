@@ -5,20 +5,30 @@ const BUILD_DIR = path.resolve(__dirname, 'dist');
 
 const config = {
   entry: path.resolve(__dirname, 'src/ui/index.js'),
+  target: 'electron-renderer',
   output: {
     path: BUILD_DIR,
     filename: 'ui-bundle.js'
   },
-  module : {
-    loaders : [
+  module: {
+    rules: [
       {
         test: /\.(jsx|js)?$/,
-        loader : 'babel-loader',
-        include: path.resolve(__dirname, 'src/ui')
-      }
+        include: path.resolve(__dirname, 'src/ui'),
+        use: [
+          {
+            loader: 'babel-loader',
+            options: {
+              presets: [
+                '@babel/preset-env',
+                '@babel/preset-react'
+              ],
+            }
+          }
+        ]
+    }
     ]
   },
-  target: 'electron-renderer'
 };
 
 module.exports = config;

@@ -10,7 +10,6 @@ class ProcessManager extends EventEmitter {
 
   constructor() {
     super();
-
     // legacy
     this.openProcessManager = this.open.bind(this);
   }
@@ -20,8 +19,7 @@ class ProcessManager extends EventEmitter {
       this.window.focus();
     }
 
-    this.window = new ProcessManagerWindow();
-    this.window.defaultSorting = options.defaultSorting || {};
+    this.window = new ProcessManagerWindow(options);
     this.window.showWhenReady();
     this.window.on('kill-process', pid => this.killProcess(pid))
     this.window.on('open-dev-tools', webContentsId => this.openDevTools(webContentsId))
@@ -30,6 +28,7 @@ class ProcessManager extends EventEmitter {
 
     return this.window;
   }
+
 
   killProcess(pid) {
     this.emit('will-kill-process', pid, this.window);
